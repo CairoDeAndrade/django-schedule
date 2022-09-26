@@ -1,0 +1,33 @@
+{% extends 'default.html' %}
+
+{% block title %} {{ request.GET.term }} search | {% endblock %}
+
+{% block content %}
+
+<h1 class="mt-5">Schedule</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Last name</th>
+      <th>Phone</th>
+      <th>Category</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for contact in contacts %}
+      <tr>
+         <td>{{ contact.id }}</td>
+        <td>
+          <a href="{% url 'see_contact' contact.id %}">{{ contact.name }}</a>
+        </td>
+        <td>{{ contact.last_name }}</td>
+        <td>{{ contact.phone }}</td>
+        <td>{{ contact.category }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

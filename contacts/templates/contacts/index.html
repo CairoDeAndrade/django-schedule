@@ -1,0 +1,53 @@
+{% extends 'default.html' %}
+
+{% block content %}
+
+<h1 class="mt-5">Schedule</h1>
+
+<!--Messages-->
+{% include 'partial/_messages.html' %}
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Last name</th>
+      <th>Phone</th>
+      <th>Category</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for contact in contacts %}
+      <tr>
+         <td>{{ contact.id }}</td>
+        <td>
+          <a href="{% url 'see_contact' contact.id %}">{{ contact.name }}</a>
+        </td>
+        <td>{{ contact.last_name }}</td>
+        <td>{{ contact.phone }}</td>
+        <td>{{ contact.category }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<!--Pagination-->
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+  {% for pag in contacts.paginator.page_range %}
+    {% if contacts.number == pag %}
+      <li class="page-item active">
+        <a class="page-link" href="?p={{ pag }}">{{ pag }}</a>
+      </li>
+    {% else %}
+       <li class="page-item ">
+        <a class="page-link" href="?p={{ pag }}">{{ pag }}</a>
+      </li>
+    {% endif %}
+  {% endfor %}
+  </ul>
+</nav>
+
+
+{% endblock %}

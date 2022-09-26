@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+  <title>{% block title %}{% endblock %}Schedule</title>
+  {%include 'partial/_head.html'%}
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  {%include 'partial/_nav.html'%}
+
+  <!--  Search bar-->
+  {% if 'accounts' not in request.path %}
+  <br><br>
+  <form method="get" action="{% url 'search' %}" style="max-width: 800px; padding-left: 80px;">
+    <div class="form-group row">
+      <div class="col-12">
+        <input class="form-control"
+               type="search" value="{{ request.GET.term }}"
+               id="search-input"
+               placeholder="Search"
+               name="term">
+      </div>
+    </div>
+  </form>
+  {% endif %}
+
+  <!-- Page Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        {% block content %}{% endblock %}
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="{% static 'vendor/jquery/jquery.slim.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js'" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+
+</body>
+</html>
